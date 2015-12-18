@@ -1,6 +1,7 @@
 package zoom;
 
 import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Slider;
@@ -19,13 +20,15 @@ public class Controller {
         iView.setImage(new Image("Homer_Simpson_2006.png"));
         iView.setFitWidth(250D);
         iView.setFitHeight(250D);
+        sliderZoom.setValue(250D);
 
+        //Creem el change listener per la propietat value del slider
         sliderZoom.valueProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable,
                                 Number oldValue, Number newValue) {
-
-                outputTextArea.appendText("Slider Value Changed (newValue: " + newValue.intValue() + ")\n");
+                iView.setFitWidth(newValue.intValue());
+                iView.setFitHeight(newValue.intValue());
             }
         });    }
 
